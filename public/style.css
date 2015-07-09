@@ -1,0 +1,31 @@
+body{
+	background: #222;
+	font: 10pt Lucida Grande
+}
+#container{
+	margin: auto;
+	width: 500px;
+	height: 500px;
+}
+.box{
+	box-sizing: border-box;
+	width: 5.86%;
+	height: 5.86%;
+	margin: -1px 0px;
+	border: 1px solid blue;
+	border-radius: 0px;
+	display: inline-block;
+	cursor: pointer;
+	background: darkblue;
+}
+.selected{
+	background-color: limegreen;
+}
+
+.playing{
+	background-color: #33f;
+}
+
+#play{
+	color: white;
+}

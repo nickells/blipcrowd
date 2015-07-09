@@ -1,0 +1,17 @@
+{
+  "name": "sequencer",
+  "version": "1.0.0",
+  "description": "music",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.13.2",
+    "express": "^4.13.1",
+    "morgan": "^1.6.1",
+    "swig": "^1.4.2"
+  }
+}
