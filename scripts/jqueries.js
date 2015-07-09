@@ -1,4 +1,11 @@
 $(document).ready(function(){
+
+	// var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	// var myAudio = $('.note').get(0)
+	// var source = audioCtx.createMediaElementSource(myAudio);
+	// source.connect(audioCtx.destination);
+
+
 	// var soundArr = [];
 	// 	soundArr.push("#audio0","#audio1","#audio2","#audio3","#audio4","#audio5","#audio6",
 	// 		"#audio7","#audio8","#audio9","#audio10","#audio11","#audio12","#audio13",
@@ -15,15 +22,40 @@ for (var i=1;i<=17;i++){
 	vertArray.push(eachRow)
 }
 
+var notes =[
+"c",
+"c#",
+"d",
+"d#",
+"e",
+"f",
+"f#",
+"g",
+"g#",
+"a",
+"a#",
+"b",
+"c",
+"c#",
+"d",
+"d#",
+"e"].reverse()
+
+
+
 $('.box').on('click', function(){
 	var thisNote = $(this).attr("id").split("-")[0]
-	console.log('playing note ',$('.note')[thisNote-1])
-	console.log($('note')[3])
-	$('.note')[thisNote-1].play();
-		// console.log('you clicked box')
-		$(this).toggleClass('selected')
-		//do dB call to change note value
-	})
+	console.log(thisNote-1)
+	if (!$(this).hasClass('selected')){
+		if (thisNote-1 < 5){
+			tones.play(notes[thisNote-1],5);   
+		}
+		else{
+			tones.play(notes[thisNote-1]);   
+		}
+	}
+	$(this).toggleClass('selected')
+})
 var clicked;
 var timer;
 var j=0
@@ -47,16 +79,18 @@ var j=0
 				var x = j-1
 				for (var i=0;i<=17;i++){
 					if($('#'+i+'-'+j).hasClass('selected')){
-						$('.note')[i-1].play();
+						if (i-1 < 5){
+							tones.play(notes[i-1],5);   
+						}
+						else{
+							tones.play(notes[i]);   
+						}
 					}
 					$('#'+i+'-'+j).addClass('playing')
 					$('#'+i+'-'+x).removeClass('playing')
-
-					if (j===18){
-						j=1}
-					}
-
-				},100)
+					if (j===18){j=1}
+				}
+		},100)
 
 		}
 	})
