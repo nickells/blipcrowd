@@ -1,3 +1,12 @@
+//add
+//bpm selection
+//chromatic vs pentatonic vs etc
+//save files
+//notification of new user
+//user colors
+//sustain/release
+
+
 $(document).ready(function(){
 window.numRows = 16
 

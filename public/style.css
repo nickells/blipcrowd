@@ -3,29 +3,26 @@ body{
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 8pt;
 	color: white;
-	display: flex;
+	/*display: flex;*/
 	margin: 20px;
-	justify-content: center;
+	/*justify-content: center;*/
 }
 #horizHolder{
-	/*background: blue;*/
-	/*margin: auto;*/
-	display: inline-flex;
+	/*flex-wrap: wrap;*/
+	margin: auto;
+	width: 570px;
+	display: flex;
+	/*height: 500px;*/
 
 }
 #container{
-	display: inline-block;
-	align-self: center;
 	width: 480px;
 	height: 480px;
 }
 #controls{
-	display: flexblock;
-	justify-content: center;
 	margin-bottom: 4px;
 }
 #piano{
-	display: inline-block;
 	width: 15px;
 }
 .box{
@@ -36,7 +33,6 @@ body{
 	display: inline-block;
 	cursor: pointer;
 	background: #006;
-	/*background: linear-gradient(#00A,#006);*/
 }
 .key{
 	box-sizing: border-box;
@@ -70,6 +66,7 @@ body{
 	border-radius: 3px;
 	cursor: pointer;
 	margin: 2px;
+	transition: .1s;
 }
 .button:hover{
 	border-color: white;
@@ -81,6 +78,15 @@ body{
 
 .black{
 	background: black;
+}
+#nick{
+	position: absolute;
+	bottom: calc(0% + 15px);
+	padding: 5px;
+}
+
+a{
+	color: grey;
 }
 
 .label{
