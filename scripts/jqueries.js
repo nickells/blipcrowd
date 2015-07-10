@@ -1,49 +1,25 @@
 $(document).ready(function(){
 
-	// var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-	// var myAudio = $('.note').get(0)
-	// var source = audioCtx.createMediaElementSource(myAudio);
-	// source.connect(audioCtx.destination);
-
-
-	// var soundArr = [];
-	// 	soundArr.push("#audio0","#audio1","#audio2","#audio3","#audio4","#audio5","#audio6",
-	// 		"#audio7","#audio8","#audio9","#audio10","#audio11","#audio12","#audio13",
-	// 		"#audio14","#audio15","#audio16")
-
 var vertArray = []
+var numRows = 16
 
-for (var i=1;i<=17;i++){
+for (var i=1;i<=numRows;i++){
 	var eachRow = [];
-	for (var j=1;j<=17;j++){
+	for (var j=1;j<=numRows;j++){
 		var aBox = '<div class="box" id="'+i+"-"+j+'">&nbsp;</div>'
+		if((j-1)%4===0){
+		var aBox = '<div class="box leftHard" id="'+i+"-"+j+'">&nbsp;</div>'
+		}
 		$(aBox).appendTo('#container')
 	}
 	vertArray.push(eachRow)
 }
 
-var notes =[
-"c",
-"c#",
-"d",
-"d#",
-"e",
-"f",
-"f#",
-"g",
-"g#",
-"a",
-"a#",
-"b",
-"c",
-"c#",
-"d",
-"d#",
-"e"].reverse()
-
-
+var notes =["c","c#","d","d#","e","f","f#","g",
+"g#","a","a#","b","c","c#","d","d#","e"].reverse()
 
 $('.box').on('click', function(){
+	socket.emit('clicked',$(this).attr("id"))
 	var thisNote = $(this).attr("id").split("-")[0]
 	console.log(thisNote-1)
 	if (!$(this).hasClass('selected')){
@@ -63,38 +39,42 @@ var j=0
 	$('#play').on('click', function(){
 		//toggle pause
 		if(clicked === true){
-			$(this).text("\u25B6")
+			$(this).text("play")
 			console.log('off')
-			// console.log(timer)
 			clearInterval(timer);
 			clicked = false;
 		}
 		else{
 			//go from left to right
-			$(this).text("\u23F8")
-			console.log('on')
+			$(this).text("pause")
 			clicked = true;
 			timer = setInterval(function(){
 				j++
 				var x = j-1
-				for (var i=0;i<=17;i++){
+				for (var i=0;i<=numRows;i++){
 					if($('#'+i+'-'+j).hasClass('selected')){
-						if (i-1 < 5){
+						if (i < 6){
 							tones.play(notes[i-1],5);   
 						}
 						else{
-							tones.play(notes[i]);   
+							tones.play(notes[i-1]);   
 						}
 					}
 					$('#'+i+'-'+j).addClass('playing')
 					$('#'+i+'-'+x).removeClass('playing')
-					if (j===18){j=1}
+					if (j===numRows+1){j=1}
 				}
 		},100)
-
 		}
 	})
 
+	$('#clear').on('click', function(){
+		for (var i=0;i<=numRows;i++){
+			for (var j=0;j<=numRows;j++){
+				$('#'+i+'-'+j).removeClass('selected')
+			}
+		}
+	})
 })
 
 

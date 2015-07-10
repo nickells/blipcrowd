@@ -1,25 +1,52 @@
 body{
 	background: #222;
-	font: 10pt Lucida Grande
+	font: 10pt Lucida Grande;
+	display: flex;
+	margin: 20px;
+	justify-content: center;
+}
+#horizHolder{
+	/*background: blue;*/
+	/*margin: auto;*/
+	display: inline-flex;
+
 }
 #container{
-	margin: auto;
-	width: 500px;
-	height: 500px;
+	display: inline-block;
+	align-self: center;
+	width: 480px;
+	height: 480px;
+}
+#controls{
+	display: flexblock;
+	justify-content: center;
+	margin-bottom: 4px;
+}
+#piano{
+	display: inline-block;
+	width: 15px;
 }
 .box{
 	box-sizing: border-box;
-	width: 5.86%;
-	height: 5.86%;
-	margin: -1px 0px;
+	width: 30px;
+	height: 30px;
 	border: 1px solid blue;
-	border-radius: 0px;
 	display: inline-block;
 	cursor: pointer;
-	background: darkblue;
+	background: #006;
+	/*background: linear-gradient(#00A,#006);*/
 }
+.key{
+	box-sizing: border-box;
+	width: 15px;
+	height: 30px;
+	background: white;
+	border: 1px solid black;
+
+}
+
 .selected{
-	background-color: limegreen;
+	background-color: #0a6;
 }
 
 .playing{
@@ -30,6 +57,27 @@ body{
 	background-color: #F3F;
 }
 
-#play{
+.button{
+	display: flex;
 	color: white;
+	height: 20px;
+	width: 50px;
+	padding-top: 3px;
+	justify-content: center;
+	border: 1px solid grey;
+	border-radius: 3px;
+	cursor: pointer;
+	margin: 2px;
+	font: 10pt Lucida Grande
+}
+.button:hover{
+	background: blue;
+}
+
+.leftHard{
+	border-left: 2px solid cyan;
+}
+
+.black{
+	background: black;
 }

@@ -1,8 +1,23 @@
+var http = require('http');
+var server = http.createServer();
 var express = require('express');
 var app = express();
+var socketio = require('socket.io');
+
+server.on('request', app);
+
 var logger = require('morgan')
 var swig = require('swig')
 var bodyParser = require('body-parser')
+
+var io = socketio(server);
+
+io.on('connection', function(socket){
+	console.log("someone connected")
+	socket.on('clicked',function($obj){
+		socket.broadcast.emit('clickEmit',$obj)
+	})
+});
 
 
 swig.setDefaults({cache: false});
@@ -20,4 +35,4 @@ app.get('/', function(req,res,err){
 	res.render('index')
 })
 
-app.listen(3000)
+server.listen(3000)
