@@ -10,5 +10,15 @@ socket.on('connect', function(){
 socket.on('clickEmit',function(data){
 	console.log("someone clicked at ", data)
 	$('#'+data).toggleClass('selected')
+})
 
+socket.on('clearedEmit',function(){
+	clearBoard()
+})
+
+
+socket.on('typeChangeEmit',function(type){
+	$('#'+type).toggleClass('selected')
+	$('#'+type).siblings().removeClass('selected')
+	tones.type = type;
 })

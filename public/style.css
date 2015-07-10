@@ -1,6 +1,8 @@
 body{
 	background: #222;
-	font: 10pt Lucida Grande;
+	font-family: "Lucida Console", Monaco, monospace;
+	font-size: 8pt;
+	color: white;
 	display: flex;
 	margin: 20px;
 	justify-content: center;
@@ -46,7 +48,7 @@ body{
 }
 
 .selected{
-	background-color: #0a6;
+	background-color: #066;
 }
 
 .playing{
@@ -61,17 +63,16 @@ body{
 	display: flex;
 	color: white;
 	height: 20px;
-	width: 50px;
-	padding-top: 3px;
+	width: 55px;
+	padding-top: 4px;
 	justify-content: center;
 	border: 1px solid grey;
 	border-radius: 3px;
 	cursor: pointer;
 	margin: 2px;
-	font: 10pt Lucida Grande
 }
 .button:hover{
-	background: blue;
+	border-color: white;
 }
 
 .leftHard{
@@ -80,4 +81,8 @@ body{
 
 .black{
 	background: black;
+}
+
+.label{
+	padding: 3px;
 }

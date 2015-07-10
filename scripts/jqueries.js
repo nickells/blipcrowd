@@ -1,7 +1,9 @@
 $(document).ready(function(){
+window.numRows = 16
 
 var vertArray = []
-var numRows = 16
+tones.type="sine"
+tones.release=500;
 
 for (var i=1;i<=numRows;i++){
 	var eachRow = [];
@@ -37,6 +39,8 @@ var timer;
 var j=0
 	//playing
 	$('#play').on('click', function(){
+		$(this).toggleClass('selected')
+
 		//toggle pause
 		if(clicked === true){
 			$(this).text("play")
@@ -69,18 +73,45 @@ var j=0
 	})
 
 	$('#clear').on('click', function(){
-		for (var i=0;i<=numRows;i++){
-			for (var j=0;j<=numRows;j++){
-				$('#'+i+'-'+j).removeClass('selected')
-			}
-		}
+		socket.emit('cleared');
+		clearBoard();
 	})
+
+	$('#square').on('click', function(){
+		tones.type="square"
+		socket.emit('typeChange',tones.type);
+		$(this).toggleClass('selected')
+		$(this).siblings().removeClass('selected')
+	})
+	$('#sine').on('click', function(){
+		tones.type="sine"
+		socket.emit('typeChange',tones.type);
+		$(this).toggleClass('selected')
+		$(this).siblings().removeClass('selected')
+	})
+	$('#sawtooth').on('click', function(){
+		tones.type="sawtooth"
+		socket.emit('typeChange',tones.type);
+		$(this).toggleClass('selected')
+		$(this).siblings().removeClass('selected')
+	})
+	$('#triangle').on('click', function(){
+		tones.type="triangle"
+		socket.emit('typeChange',tones.type);
+		$(this).toggleClass('selected')
+		$(this).siblings().removeClass('selected')
+	})
+
+
 })
 
 
 
-
-// function playFunction(){
-
-// }
+function clearBoard(){
+for (var i=0;i<=numRows;i++){
+	for (var j=0;j<=numRows;j++){
+		$('#'+i+'-'+j).removeClass('selected')
+		}
+	}
+}
 

@@ -17,6 +17,12 @@ io.on('connection', function(socket){
 	socket.on('clicked',function($obj){
 		socket.broadcast.emit('clickEmit',$obj)
 	})
+	socket.on('cleared',function(){
+		socket.broadcast.emit('clearedEmit')
+	})
+	socket.on('typeChange',function(data){
+		socket.broadcast.emit('typeChangeEmit',data)
+	})
 });
 
 
@@ -31,6 +37,11 @@ app.use(express.static(__dirname + '/scripts'));
 
 
 app.get('/', function(req,res,err){
+	if (err) console.log(err);
+	res.render('index')
+})
+
+app.get('/*', function(req,res,err){
 	if (err) console.log(err);
 	res.render('index')
 })
