@@ -23,6 +23,12 @@ io.on('connection', function(socket){
 	socket.on('typeChange',function(data){
 		socket.broadcast.emit('typeChangeEmit',data)
 	})
+	socket.on('releaseChange',function(data){
+		socket.broadcast.emit('releaseChangeEmit',data)
+	})
+	socket.on('bpmChange',function(data){
+		socket.broadcast.emit('bpmChangeEmit',data)
+	})
 });
 
 

@@ -1,38 +1,80 @@
-//add
-//bpm selection
+//toDo
+//bpm selection√
+//move architecture to arrays
 //chromatic vs pentatonic vs etc
 //save files
 //notification of new user
 //user colors
 //sustain/release
+//refactor
 
 
 $(document).ready(function(){
-window.numRows = 16
+window.numColumns = 16
 
 var vertArray = []
 tones.type="sine"
 tones.release=500;
+var ms = 100;
 
-for (var i=1;i<=numRows;i++){
+//create board
+for (var i=1;i<=numColumns;i++){
 	var eachRow = [];
-	for (var j=1;j<=numRows;j++){
-		var aBox = '<div class="box" id="'+i+"-"+j+'">&nbsp;</div>'
+	for (var j=1;j<=numColumns;j++){
+		var aBox = '<div class="box noselect" id="'+i+"-"+j+'">&nbsp;</div>'
 		if((j-1)%4===0){
-		var aBox = '<div class="box leftHard" id="'+i+"-"+j+'">&nbsp;</div>'
+		var aBox = '<div class="box leftHard noselect" id="'+i+"-"+j+'">&nbsp;</div>'
 		}
 		$(aBox).appendTo('#container')
 	}
 	vertArray.push(eachRow)
 }
 
-var notes =["c","c#","d","d#","e","f","f#","g",
+window.notes =["c","c#","d","d#","e","f","f#","g",
 "g#","a","a#","b","c","c#","d","d#","e"].reverse()
 
+//bpm select
+$('#bpm').on('change',function(){
+	var bpm = $(this).val()
+	var qtrN = Math.round(((60/bpm)*1000)*100000)/100000
+	var sixteenths =(qtrN/4)
+	ms = Math.round(sixteenths *100000)/100000
+
+	socket.emit('bpmChange',[ms,bpm])
+
+	if(isPlaying){
+		clearInterval(timer);
+		timer = setInterval(playFunc,ms)
+	}
+
+})
+	socket.on('bpmChangeEmit',function(data){
+		$('#bpm').val(data[1])
+		console.log(data)
+		ms = data[0];
+	if(isPlaying){
+		clearInterval(timer);
+		timer = setInterval(playFunc,ms)
+	}
+	})
+
+
+// $('#attack').on('change', function(){
+// 	tones.attack = $(this).val()*2;
+// 	console.log(tones.attack)
+// })
+
+$('#release').on('change', function(){
+	tones.release = $(this).val();
+	socket.emit('releaseChange',tones.release)
+	console.log(tones.release)
+})	
+
+//set notes to be played
 $('.box').on('click', function(){
 	socket.emit('clicked',$(this).attr("id"))
 	var thisNote = $(this).attr("id").split("-")[0]
-	console.log(thisNote-1)
+	// console.log(thisNote-1)
 	if (!$(this).hasClass('selected')){
 		if (thisNote-1 < 5){
 			tones.play(notes[thisNote-1],5);   
@@ -43,83 +85,82 @@ $('.box').on('click', function(){
 	}
 	$(this).toggleClass('selected')
 })
-var clicked;
+
+var isPlaying;
 var timer;
-var j=0
+window.j=0
+
 	//playing
 	$('#play').on('click', function(){
-		$(this).toggleClass('selected')
-
 		//toggle pause
-		if(clicked === true){
+		if(isPlaying === true){
+			$(this).removeClass('selected')
 			$(this).text("play")
-			console.log('off')
 			clearInterval(timer);
-			clicked = false;
+			isPlaying = false;
 		}
 		else{
 			//go from left to right
+			$(this).addClass('selected')
 			$(this).text("pause")
-			clicked = true;
-			timer = setInterval(function(){
-				j++
-				var x = j-1
-				for (var i=0;i<=numRows;i++){
-					if($('#'+i+'-'+j).hasClass('selected')){
-						if (i < 6){
-							tones.play(notes[i-1],5);   
-						}
-						else{
-							tones.play(notes[i-1]);   
-						}
-					}
-					$('#'+i+'-'+j).addClass('playing')
-					$('#'+i+'-'+x).removeClass('playing')
-					if (j===numRows+1){j=1}
-				}
-		},100)
+			isPlaying = true;
+			timer = setInterval(playFunc,ms)
 		}
 	})
 
+	//settings
 	$('#clear').on('click', function(){
 		socket.emit('cleared');
 		clearBoard();
 	})
 
 	$('#square').on('click', function(){
-		tones.type="square"
-		socket.emit('typeChange',tones.type);
-		$(this).toggleClass('selected')
-		$(this).siblings().removeClass('selected')
+		changeTone.call(this,'square')
 	})
 	$('#sine').on('click', function(){
-		tones.type="sine"
-		socket.emit('typeChange',tones.type);
-		$(this).toggleClass('selected')
-		$(this).siblings().removeClass('selected')
+		changeTone.call(this,'sine')
 	})
 	$('#sawtooth').on('click', function(){
-		tones.type="sawtooth"
-		socket.emit('typeChange',tones.type);
-		$(this).toggleClass('selected')
-		$(this).siblings().removeClass('selected')
+		changeTone.call(this,'sawtooth')
 	})
 	$('#triangle').on('click', function(){
-		tones.type="triangle"
-		socket.emit('typeChange',tones.type);
-		$(this).toggleClass('selected')
-		$(this).siblings().removeClass('selected')
+		changeTone.call(this,'triangle')
 	})
-
 
 })
 
+function changeTone(type){
+	tones.type = type;
+	// console.log(type)
+	socket.emit('typeChange',tones.type);
+	$(this).toggleClass('selected')
+	$(this).siblings().removeClass('selected')
+}
 
+function playFunc(){
+	j++
+	var x = j-1
+	for (var i=0;i<=numColumns;i++){
+		if($('#'+i+'-'+j).hasClass('selected')){
+			if (i < 6){
+				tones.play(notes[i-1],5);   
+			}
+			else{
+				tones.play(notes[i-1]);   
+			}
+		}
+		$('#'+i+'-'+j).addClass('playing')
+		$('#'+i+'-'+x).removeClass('playing')
+		if (j===numColumns+1){j=1}
+	}
+}
 
 function clearBoard(){
-for (var i=0;i<=numRows;i++){
-	for (var j=0;j<=numRows;j++){
-		$('#'+i+'-'+j).removeClass('selected')
+j = 0;
+isPlaying = false;
+for (var i=0;i<=numColumns;i++){
+	for (var y=0;y<=numColumns;y++){
+		$('#'+i+'-'+y).removeClass('selected playing')
 		}
 	}
 }

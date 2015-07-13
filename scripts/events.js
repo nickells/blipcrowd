@@ -8,7 +8,7 @@ socket.on('connect', function(){
 });
 
 socket.on('clickEmit',function(data){
-	console.log("someone clicked at ", data)
+	console.log(socket.id,"clicked at", data)
 	$('#'+data).toggleClass('selected')
 })
 
@@ -22,3 +22,10 @@ socket.on('typeChangeEmit',function(type){
 	$('#'+type).siblings().removeClass('selected')
 	tones.type = type;
 })
+
+socket.on('releaseChangeEmit',function(data){
+	// console.log(data)
+	$('#release').val(data)
+	tones.release = data;
+})
+

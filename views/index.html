@@ -17,7 +17,9 @@
 		<div id="container">
 		</div>
 		<div id="controls">
-			<div class="button" id="play">play</div><div class="button"id="clear">clear</div><div class="label">wave:</div><span><div class="button" id="square">square</div><div class="button selected" id="sine">sine</div><div class="button" id="sawtooth">saw</div><div class="button" id="triangle">triangle</div></span>
+			<div class="button" id="play">play</div><div class="button"id="clear">clear</div><div class="label">bpm:</div><input type="number" id="bpm" min="1" max="400" value="120"></input><div class="label">wave:</div><span><div class="button" id="square">square</div><div class="button selected" id="sine">sine</div><div class="button" id="sawtooth">saw</div><div class="button" id="triangle">triangle</div></span>
+<!-- 			<div class="label">attack:</div><input type="range"id="attack"></input>
+ -->			<div class="label" >sustain:</div><input type="range" id="release" min="50" max="700" value="100"></input>
 		</div>
 	</div>
 	<div id="nick">made by nick with help from <a href="https://github.com/bit101/tones">tones.js</a></div>

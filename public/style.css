@@ -3,16 +3,12 @@ body{
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 8pt;
 	color: white;
-	/*display: flex;*/
 	margin: 20px;
-	/*justify-content: center;*/
 }
 #horizHolder{
-	/*flex-wrap: wrap;*/
 	margin: auto;
 	width: 570px;
 	display: flex;
-	/*height: 500px;*/
 
 }
 #container{
@@ -20,7 +16,7 @@ body{
 	height: 480px;
 }
 #controls{
-	margin-bottom: 4px;
+	margin-left: 6px;
 }
 #piano{
 	width: 15px;
@@ -59,13 +55,13 @@ body{
 	display: flex;
 	color: white;
 	height: 20px;
-	width: 55px;
+	width: 60px;
 	padding-top: 4px;
 	justify-content: center;
 	border: 1px solid grey;
 	border-radius: 3px;
 	cursor: pointer;
-	margin: 2px;
+	margin: 3px 0px;
 	transition: .1s;
 }
 .button:hover{
@@ -87,6 +83,25 @@ body{
 
 a{
 	color: grey;
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+#bpm{
+	margin: 3px 2px;
+	width: 48px;
+	font-family: "Lucida Console", Monaco, monospace;
+}
+
+input{
+	width: 60px;
 }
 
 .label{
