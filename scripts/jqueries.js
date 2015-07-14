@@ -11,11 +11,11 @@
 
 $(document).ready(function(){
 window.numColumns = 16
-
 var vertArray = []
+var notesArray = []
 tones.type="sine"
 tones.release=500;
-var ms = 100;
+var ms = 125;
 
 //create board
 for (var i=1;i<=numColumns;i++){
@@ -29,6 +29,8 @@ for (var i=1;i<=numColumns;i++){
 	}
 	vertArray.push(eachRow)
 }
+
+//grab persistent data
 
 window.notes =["c","c#","d","d#","e","f","f#","g",
 "g#","a","a#","b","c","c#","d","d#","e"].reverse()
@@ -52,10 +54,12 @@ $('#bpm').on('change',function(){
 		$('#bpm').val(data[1])
 		console.log(data)
 		ms = data[0];
+
 	if(isPlaying){
 		clearInterval(timer);
 		timer = setInterval(playFunc,ms)
 	}
+
 	})
 
 
@@ -64,6 +68,7 @@ $('#bpm').on('change',function(){
 // 	console.log(tones.attack)
 // })
 
+//change sustain
 $('#release').on('change', function(){
 	tones.release = $(this).val();
 	socket.emit('releaseChange',tones.release)
@@ -72,18 +77,20 @@ $('#release').on('change', function(){
 
 //set notes to be played
 $('.box').on('click', function(){
+	var noteCoords = $(this).attr("id").split("-")
+	var thisPitch = noteCoords[0]
 	socket.emit('clicked',$(this).attr("id"))
-	var thisNote = $(this).attr("id").split("-")[0]
-	// console.log(thisNote-1)
+	// console.log(thisPitch-1)
 	if (!$(this).hasClass('selected')){
-		if (thisNote-1 < 5){
-			tones.play(notes[thisNote-1],5);   
+		if (thisPitch-1 < 5){
+			tones.play(notes[thisPitch-1],5);   
 		}
 		else{
-			tones.play(notes[thisNote-1]);   
+			tones.play(notes[thisPitch-1]);   
 		}
 	}
 	$(this).toggleClass('selected')
+
 })
 
 var isPlaying;
@@ -128,6 +135,7 @@ window.j=0
 	})
 
 })
+
 
 function changeTone(type){
 	tones.type = type;

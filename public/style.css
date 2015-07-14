@@ -27,8 +27,11 @@ body{
 	height: 30px;
 	border: 1px solid blue;
 	display: inline-block;
-	cursor: pointer;
+	cursor: none;
 	background: #006;
+}
+.box:hover{
+	border: 1px solid cyan;
 }
 .key{
 	box-sizing: border-box;
@@ -69,7 +72,7 @@ body{
 }
 
 .leftHard{
-	border-left: 2px solid cyan;
+	border-left: 1px solid cyan;
 }
 
 .black{
@@ -78,6 +81,12 @@ body{
 #nick{
 	position: absolute;
 	bottom: calc(0% + 15px);
+	padding: 5px;
+}
+
+#people{
+	position: absolute;
+	top: calc(0% + 15px);
 	padding: 5px;
 }
 

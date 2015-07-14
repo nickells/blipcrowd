@@ -2,21 +2,19 @@
 <html lang="en">
 <body>
 	<head>
+
+		<title>sequencer!</title>
 		<link href="style.css" rel="stylesheet">
 	</head>
-	<script src="socket.io/socket.io.js"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
-	</script>
-	<script src="events.js"></script>
-	<script src="jqueries.js"></script>
-	<script src="tones.js"></script>
+	<div id="people">current users:</br>
+	</div>
 	<div id="horizHolder">
 		<div id="piano">
 			<div class="key black"></div><div class="key"></div><div class="key black"></div><div class="key"></div><div class="key"></div><div class="key black"></div><div class="key"></div><div class="key black"></div><div class="key"></div><div class="key black"></div><div class="key"></div><div class="key"></div><div class="key black"></div><div class="key"></div><div class="key black"></div><div class="key"></div>
 		</div>
 		<div id="container">
 		</div>
-		<div id="controls">
+		<div id="controls" class="noselect">
 			<div class="button" id="play">play</div><div class="button"id="clear">clear</div><div class="label">bpm:</div><input type="number" id="bpm" min="1" max="400" value="120"></input><div class="label">wave:</div><span><div class="button" id="square">square</div><div class="button selected" id="sine">sine</div><div class="button" id="sawtooth">saw</div><div class="button" id="triangle">triangle</div></span>
 <!-- 			<div class="label">attack:</div><input type="range"id="attack"></input>
  -->			<div class="label" >sustain:</div><input type="range" id="release" min="50" max="700" value="100"></input>
@@ -26,4 +24,10 @@
 
 	
 </body>
+	<script src="socket.io/socket.io.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js">
+	</script>
+	<script src="events.js"></script>
+	<script src="jqueries.js"></script>
+	<script src="tones.js"></script>
 </html>
