@@ -26,8 +26,8 @@ body{
 }
 .box{
 	box-sizing: border-box;
-	width: 30px;
-	height: 30px;
+	width: 6.25%;
+	height: 6.25%;
 	border: 1px solid blue;
 	display: inline-block;
 	cursor: none;
