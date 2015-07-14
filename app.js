@@ -3,6 +3,7 @@ var server = http.createServer();
 var express = require('express');
 var app = express();
 var socketio = require('socket.io');
+var favicon = require('serve-favicon')
 
 server.on('request', app);
 
@@ -66,6 +67,7 @@ app.set('view engine','html')
 
 // app.use(logger('dev'))
 
+app.use(favicon(__dirname + '/public/favicon.png'));
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/scripts'));
 
