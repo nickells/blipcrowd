@@ -82,5 +82,5 @@ app.get('/*', function(req,res,err){
 	res.render('index')
 })
 
-server.listen(3000)
+server.listen(process.env.PORT || 5000)
 
