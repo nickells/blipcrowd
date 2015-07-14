@@ -86,9 +86,10 @@ $('.box').on('click', function(){
 			tones.play(notes[thisPitch-1],5);   
 		}
 		else{
-			tones.play(notes[thisPitch-1]);   
+			tones.play(notes[thisPitch-1],4);   
 		}
 	}
+	console.log($(this))
 	$(this).toggleClass('selected')
 
 })

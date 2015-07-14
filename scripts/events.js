@@ -1,3 +1,5 @@
+
+
 var socket = io(window.location.origin);
 var thisPath = window.location.href
 var localIdList = [];

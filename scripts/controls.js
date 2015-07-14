@@ -1,3 +1,6 @@
+$(document).ready(function(){
+
+
 $('#bpm').on('change',function(){
 	var bpm = $(this).val()
 	var qtrN = Math.round(((60/bpm)*1000)*100000)/100000
@@ -28,3 +31,5 @@ $('#bpm').on('change',function(){
 	$('#triangle').on('click', function(){
 		changeTone.call(this,'triangle')
 	})
+
+})
