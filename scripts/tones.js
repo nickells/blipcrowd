@@ -8,6 +8,8 @@
 
 
         playFrequency: function(freq) {
+            console.log(this.context)
+            console.log(osc)
             this.attack = this.attack || 1;
             this.release = this.release || 1;
             var envelope = this.context.createGain();
@@ -19,7 +21,7 @@
             if(this.release) {
                 envelope.gain.setTargetAtTime(0, this.context.currentTime + this.attack / 1000, this.release / 1000);
                 setTimeout(function() {
-                    osc.stop();
+                    osc.stop(0);
                     osc.disconnect(envelope);
                     envelope.gain.cancelScheduledValues(tones.context.currentTime);
                     envelope.disconnect(tones.context.destination);
@@ -28,10 +30,11 @@
             }
 
             var osc = this.context.createOscillator();
+            console.log(osc)
             osc.frequency.setValueAtTime(freq, this.context.currentTime);
             osc.type = this.type;
             osc.connect(envelope);
-            osc.start();
+            osc.start(0);
         },
 
         /** 

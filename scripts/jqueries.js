@@ -82,6 +82,7 @@ $('.box').on('click', function(){
 	socket.emit('clicked',$(this).attr("id"))
 	// console.log(thisPitch-1)
 	if (!$(this).hasClass('selected')){
+
 		if (thisPitch-1 < 5){
 			tones.play(notes[thisPitch-1],5);   
 		}
@@ -89,7 +90,6 @@ $('.box').on('click', function(){
 			tones.play(notes[thisPitch-1],4);   
 		}
 	}
-	console.log($(this))
 	$(this).toggleClass('selected')
 
 })
