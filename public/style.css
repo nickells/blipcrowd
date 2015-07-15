@@ -1,5 +1,7 @@
 body{
 	background: #222;
+	background-image: url(dark_geometric/dark_geometric.png);
+    background-repeat: repeat;
 	font-family: "Lucida Console", Monaco, monospace;
 	font-size: 8pt;
 	color: white;
