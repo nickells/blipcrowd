@@ -1,12 +1,11 @@
 //toDo
-//bpm selection√
+//fix terrible click event persistence
 //move architecture to arrays
 //chromatic vs pentatonic vs etc
 //save files
-//notification of new user
 //user colors
-//sustain/release
-//refactor
+//get rid of window variables
+//fix notes to work better with different window sizes
 
 
 $(document).ready(function(){
